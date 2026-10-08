@@ -19,7 +19,7 @@ NOTEBOOK = "ibaidullina.ipynb"
 def main():
     ap = argparse.ArgumentParser(description="ShopStream A2: reproduce all results")
     ap.add_argument("--scale", default="medium", choices=["tiny", "small", "medium", "large"])
-    ap.add_argument("--seed", type=int, required=True, help="последние 4 цифры студенческого")
+    ap.add_argument("--seed", type=int, required=True, help="5820")
     a = ap.parse_args()
 
     os.makedirs("results", exist_ok=True)

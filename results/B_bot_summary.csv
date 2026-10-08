@@ -1,0 +1,2 @@
+rule,p999_events_per_day,p999_n_events,bot_users,bot_events,pct_of_silver_events
+events_per_day > p99.9 AND n_events > p99.9 AND no cart/purchase activity,21.29,708,1,20670,3.84
