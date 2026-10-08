@@ -1,0 +1,20 @@
+variant,plan_line
+raw_json,Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/events]
+raw_json,PushedFilters: [IsNotNull(product_id)]
+raw_json,"ReadSchema: struct<product_id:string,event_type:string,event_ts:string,price:double,quantity:bigint>"
+raw_json,Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/products.csv]
+raw_json,"PushedFilters: [IsNotNull(category), EqualTo(category,electronics), IsNotNull(product_id)]"
+raw_json,"ReadSchema: struct<product_id:string,category:string>"
+parquet_unpartitioned,Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/lake/silver_flat]
+parquet_unpartitioned,"PushedFilters: [IsNotNull(event_type), IsNotNull(event_date), EqualTo(event_type,purchase), GreaterThanOrEqual(event_date,2026-08-10), LessThanOrEqual(event_date,2026-08-16), IsNotNull(product_id)]"
+parquet_unpartitioned,"ReadSchema: struct<product_id:string,event_type:string,price:double,quantity:bigint,event_date:date>"
+parquet_unpartitioned,Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/products.csv]
+parquet_unpartitioned,"PushedFilters: [IsNotNull(category), EqualTo(category,electronics), IsNotNull(product_id)]"
+parquet_unpartitioned,"ReadSchema: struct<product_id:string,category:string>"
+parquet_partitioned,Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/lake/silver_iii_balanced]
+parquet_partitioned,"PartitionFilters: [isnotnull(event_date#10353), (event_date#10353 >= 2026-08-10), (event_date#10353 <= 2026-08-16)]"
+parquet_partitioned,"PushedFilters: [IsNotNull(event_type), EqualTo(event_type,purchase), IsNotNull(product_id)]"
+parquet_partitioned,"ReadSchema: struct<product_id:string,event_type:string,price:double,quantity:bigint>"
+parquet_partitioned,Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/products.csv]
+parquet_partitioned,"PushedFilters: [IsNotNull(category), EqualTo(category,electronics), IsNotNull(product_id)]"
+parquet_partitioned,"ReadSchema: struct<product_id:string,category:string>"

@@ -1,0 +1,4 @@
+variant,median_s,runs_s,revenue
+raw_json,0.732,"[0.601, 0.86, 0.732]",61804.06
+parquet_unpartitioned,0.369,"[0.432, 0.368, 0.369]",61220.4
+parquet_partitioned,0.427,"[0.427, 0.389, 0.454]",61220.4

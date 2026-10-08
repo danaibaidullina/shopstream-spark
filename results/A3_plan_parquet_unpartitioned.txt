@@ -1,0 +1,83 @@
+== Physical Plan ==
+AdaptiveSparkPlan (13)
++- HashAggregate (12)
+   +- Exchange (11)
+      +- HashAggregate (10)
+         +- Project (9)
+            +- BroadcastHashJoin Inner BuildRight (8)
+               :- Project (3)
+               :  +- Filter (2)
+               :     +- Scan parquet  (1)
+               +- BroadcastExchange (7)
+                  +- Project (6)
+                     +- Filter (5)
+                        +- Scan csv  (4)
+
+
+(1) Scan parquet 
+Output [5]: [product_id#9967, event_type#9968, price#9971, quantity#9972L, event_date#9975]
+Batched: true
+Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/lake/silver_flat]
+PushedFilters: [IsNotNull(event_type), IsNotNull(event_date), EqualTo(event_type,purchase), GreaterThanOrEqual(event_date,2026-08-10), LessThanOrEqual(event_date,2026-08-16), IsNotNull(product_id)]
+ReadSchema: struct<product_id:string,event_type:string,price:double,quantity:bigint,event_date:date>
+
+(2) Filter
+Input [5]: [product_id#9967, event_type#9968, price#9971, quantity#9972L, event_date#9975]
+Condition : (((((isnotnull(event_type#9968) AND isnotnull(event_date#9975)) AND (event_type#9968 = purchase)) AND (event_date#9975 >= 2026-08-10)) AND (event_date#9975 <= 2026-08-16)) AND isnotnull(product_id#9967))
+
+(3) Project
+Output [3]: [product_id#9967, price#9971, quantity#9972L]
+Input [5]: [product_id#9967, event_type#9968, price#9971, quantity#9972L, event_date#9975]
+
+(4) Scan csv 
+Output [2]: [product_id#831, category#832]
+Batched: false
+Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/products.csv]
+PushedFilters: [IsNotNull(category), EqualTo(category,electronics), IsNotNull(product_id)]
+ReadSchema: struct<product_id:string,category:string>
+
+(5) Filter
+Input [2]: [product_id#831, category#832]
+Condition : ((isnotnull(category#832) AND (category#832 = electronics)) AND isnotnull(product_id#831))
+
+(6) Project
+Output [1]: [product_id#831]
+Input [2]: [product_id#831, category#832]
+
+(7) BroadcastExchange
+Input [1]: [product_id#831]
+Arguments: HashedRelationBroadcastMode(List(input[0, string, true]),false), [plan_id=5836]
+
+(8) BroadcastHashJoin
+Left keys [1]: [product_id#9967]
+Right keys [1]: [product_id#831]
+Join type: Inner
+Join condition: None
+
+(9) Project
+Output [2]: [price#9971, quantity#9972L]
+Input [4]: [product_id#9967, price#9971, quantity#9972L, product_id#831]
+
+(10) HashAggregate
+Input [2]: [price#9971, quantity#9972L]
+Keys: []
+Functions [1]: [partial_sum((price#9971 * cast(quantity#9972L as double)))]
+Aggregate Attributes [1]: [sum#10020]
+Results [1]: [sum#10021]
+
+(11) Exchange
+Input [1]: [sum#10021]
+Arguments: SinglePartition, ENSURE_REQUIREMENTS, [plan_id=5841]
+
+(12) HashAggregate
+Input [1]: [sum#10021]
+Keys: []
+Functions [1]: [sum((price#9971 * cast(quantity#9972L as double)))]
+Aggregate Attributes [1]: [sum((price#9971 * cast(quantity#9972L as double)))#10004]
+Results [1]: [round(sum((price#9971 * cast(quantity#9972L as double)))#10004, 2) AS revenue#10005]
+
+(13) AdaptiveSparkPlan
+Output [1]: [revenue#10005]
+Arguments: isFinalPlan=false
+
+
