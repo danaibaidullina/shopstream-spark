@@ -1,0 +1,7 @@
+strategy,median_s,runs_s,join_type,aqe_skew_triggered,rows,checksum
+a) broadcast hash join,0.21,"[0.21, 0.2, 0.23]",BroadcastHashJoin,False,538071,1679487918429285145717
+"b) sort-merge, AQE off",3.45,"[3.46, 3.45, 3.41]",SortMergeJoin,False,538071,1679487918429285145717
+"c) sort-merge, AQE skew join",3.21,"[3.8, 3.16, 3.21]",SortMergeJoin,True,538071,1679487918429285145717
+"d) sort-merge, AQE off, salt N=4",3.79,"[3.64, 3.79, 3.84]",SortMergeJoin,False,538071,1679487918429285145717
+"d) sort-merge, AQE off, salt N=16",3.84,"[3.84, 3.92, 3.81]",SortMergeJoin,False,538071,1679487918429285145717
+"d) sort-merge, AQE off, salt N=64",4.07,"[4.09, 4.07, 3.62]",SortMergeJoin,False,538071,1679487918429285145717
