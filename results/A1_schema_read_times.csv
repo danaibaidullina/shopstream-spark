@@ -1,5 +1,5 @@
 variant,median_s,runs_s
-inferred: read only,0.578,"[1.347, 0.556, 0.578]"
-explicit: read only,0.118,"[0.108, 0.118, 0.121]"
-inferred: read + count,0.923,"[0.95, 0.923, 0.831]"
-explicit: read + count,0.321,"[0.321, 0.318, 0.322]"
+inferred: read only,1.311,"[1.382, 1.311, 1.056]"
+explicit: read only,0.127,"[0.125, 0.127, 0.186]"
+inferred: read + count,1.586,"[1.586, 1.673, 1.563]"
+explicit: read + count,0.567,"[0.567, 0.562, 0.577]"

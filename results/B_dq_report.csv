@@ -1,9 +1,9 @@
 rule,definition,rows,pct_of_raw
-R1,user_id is NULL,4565,0.829
-R2,event_ts unparseable / before 2026-01-01 / after ingest_ts,1135,0.206
-R3,price <= 0 or NULL,1644,0.298
+R1,user_id is NULL,22243,0.786
+R2,event_ts unparseable / before 2026-01-01 / after ingest_ts,5643,0.199
+R3,price <= 0 or NULL,8535,0.302
 R4,event_type invalid after trim + lower,0,0.0
-R5,product_id not in products.csv,2242,0.407
-R6,duplicate event_id (later copies removed),3286,0.596
-quarantine,rows failing >= 1 of R1-R5,9526,1.729
-silver,valid rows,538071,97.674
+R5,product_id not in products.csv,11300,0.399
+R6,duplicate event_id (later copies removed),16871,0.596
+quarantine,rows failing >= 1 of R1-R5,47445,1.677
+silver,valid rows,2764395,97.726

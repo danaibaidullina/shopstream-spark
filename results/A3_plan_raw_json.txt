@@ -17,7 +17,7 @@ AdaptiveSparkPlan (13)
 (1) Scan json 
 Output [6]: [product_id#9578, event_type#9579, event_ts#9580, price#9582, quantity#9583L, date#9586]
 Batched: false
-Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/events]
+Location: InMemoryFileIndex [file:/C:/Users/Dana/Desktop/shopstream-spark/data/shopstream_medium_5820/events]
 PushedFilters: [IsNotNull(product_id)]
 ReadSchema: struct<product_id:string,event_type:string,event_ts:string,price:double,quantity:bigint>
 
@@ -32,7 +32,7 @@ Input [6]: [product_id#9578, event_type#9579, event_ts#9580, price#9582, quantit
 (4) Scan csv 
 Output [2]: [product_id#831, category#832]
 Batched: false
-Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/products.csv]
+Location: InMemoryFileIndex [file:/C:/Users/Dana/Desktop/shopstream-spark/data/shopstream_medium_5820/products.csv]
 PushedFilters: [IsNotNull(category), EqualTo(category,electronics), IsNotNull(product_id)]
 ReadSchema: struct<product_id:string,category:string>
 
