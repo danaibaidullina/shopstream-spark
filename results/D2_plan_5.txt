@@ -23,35 +23,35 @@
 
 
 (1) Scan parquet 
-Output [13]: [user_id#25266, event_id#25267, session_id#25268, product_id#25269, event_type#25270, event_ts#25271, ingest_ts#25272, price#25273, quantity#25274L, device#25275, app_version#25276, is_bot#25277, event_date#25278]
+Output [13]: [user_id#25132, event_id#25133, session_id#25134, product_id#25135, event_type#25136, event_ts#25137, ingest_ts#25138, price#25139, quantity#25140L, device#25141, app_version#25142, is_bot#25143, event_date#25144]
 Batched: true
-Location: InMemoryFileIndex [file:/C:/Users/Dana/Desktop/shopstream-spark/data/shopstream_medium_5820/lake/silver_iii_balanced]
+Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/lake/silver_iii_balanced]
 PushedFilters: [IsNotNull(user_id)]
 ReadSchema: struct<user_id:string,event_id:string,session_id:string,product_id:string,event_type:string,event_ts:timestamp,ingest_ts:timestamp,price:double,quantity:bigint,device:string,app_version:string,is_bot:boolean>
 
 (2) ColumnarToRow [codegen id : 1]
-Input [13]: [user_id#25266, event_id#25267, session_id#25268, product_id#25269, event_type#25270, event_ts#25271, ingest_ts#25272, price#25273, quantity#25274L, device#25275, app_version#25276, is_bot#25277, event_date#25278]
+Input [13]: [user_id#25132, event_id#25133, session_id#25134, product_id#25135, event_type#25136, event_ts#25137, ingest_ts#25138, price#25139, quantity#25140L, device#25141, app_version#25142, is_bot#25143, event_date#25144]
 
 (3) Filter [codegen id : 1]
-Input [13]: [user_id#25266, event_id#25267, session_id#25268, product_id#25269, event_type#25270, event_ts#25271, ingest_ts#25272, price#25273, quantity#25274L, device#25275, app_version#25276, is_bot#25277, event_date#25278]
-Condition : ((isnotnull((user_id#25266 = u_000000)) AND isnotnull(user_id#25266)) AND CASE WHEN (user_id#25266 = u_000000) THEN isnotnull(cast(pmod(xxhash64(event_id#25267, 42), 64) as int)) ELSE true END)
+Input [13]: [user_id#25132, event_id#25133, session_id#25134, product_id#25135, event_type#25136, event_ts#25137, ingest_ts#25138, price#25139, quantity#25140L, device#25141, app_version#25142, is_bot#25143, event_date#25144]
+Condition : ((isnotnull((user_id#25132 = u_000000)) AND isnotnull(user_id#25132)) AND CASE WHEN (user_id#25132 = u_000000) THEN isnotnull(cast(pmod(xxhash64(event_id#25133, 42), 64) as int)) ELSE true END)
 
 (4) Project [codegen id : 1]
-Output [14]: [user_id#25266, event_id#25267, session_id#25268, product_id#25269, event_type#25270, event_ts#25271, ingest_ts#25272, price#25273, quantity#25274L, device#25275, app_version#25276, is_bot#25277, event_date#25278, CASE WHEN (user_id#25266 = u_000000) THEN cast(pmod(xxhash64(event_id#25267, 42), 64) as int) ELSE 0 END AS salt#28697]
-Input [13]: [user_id#25266, event_id#25267, session_id#25268, product_id#25269, event_type#25270, event_ts#25271, ingest_ts#25272, price#25273, quantity#25274L, device#25275, app_version#25276, is_bot#25277, event_date#25278]
+Output [14]: [user_id#25132, event_id#25133, session_id#25134, product_id#25135, event_type#25136, event_ts#25137, ingest_ts#25138, price#25139, quantity#25140L, device#25141, app_version#25142, is_bot#25143, event_date#25144, CASE WHEN (user_id#25132 = u_000000) THEN cast(pmod(xxhash64(event_id#25133, 42), 64) as int) ELSE 0 END AS salt#28563]
+Input [13]: [user_id#25132, event_id#25133, session_id#25134, product_id#25135, event_type#25136, event_ts#25137, ingest_ts#25138, price#25139, quantity#25140L, device#25141, app_version#25142, is_bot#25143, event_date#25144]
 
 (5) Exchange
-Input [14]: [user_id#25266, event_id#25267, session_id#25268, product_id#25269, event_type#25270, event_ts#25271, ingest_ts#25272, price#25273, quantity#25274L, device#25275, app_version#25276, is_bot#25277, event_date#25278, salt#28697]
-Arguments: hashpartitioning(user_id#25266, salt#28697, 200), ENSURE_REQUIREMENTS, [plan_id=25314]
+Input [14]: [user_id#25132, event_id#25133, session_id#25134, product_id#25135, event_type#25136, event_ts#25137, ingest_ts#25138, price#25139, quantity#25140L, device#25141, app_version#25142, is_bot#25143, event_date#25144, salt#28563]
+Arguments: hashpartitioning(user_id#25132, salt#28563, 200), ENSURE_REQUIREMENTS, [plan_id=25128]
 
 (6) Sort [codegen id : 2]
-Input [14]: [user_id#25266, event_id#25267, session_id#25268, product_id#25269, event_type#25270, event_ts#25271, ingest_ts#25272, price#25273, quantity#25274L, device#25275, app_version#25276, is_bot#25277, event_date#25278, salt#28697]
-Arguments: [user_id#25266 ASC NULLS FIRST, salt#28697 ASC NULLS FIRST], false, 0
+Input [14]: [user_id#25132, event_id#25133, session_id#25134, product_id#25135, event_type#25136, event_ts#25137, ingest_ts#25138, price#25139, quantity#25140L, device#25141, app_version#25142, is_bot#25143, event_date#25144, salt#28563]
+Arguments: [user_id#25132 ASC NULLS FIRST, salt#28563 ASC NULLS FIRST], false, 0
 
 (7) Scan csv 
 Output [6]: [user_id#858, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863]
 Batched: false
-Location: InMemoryFileIndex [file:/C:/Users/Dana/Desktop/shopstream-spark/data/shopstream_medium_5820/users.csv]
+Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/users.csv]
 PushedFilters: [IsNotNull(user_id), EqualTo(user_id,u_000000)]
 ReadSchema: struct<user_id:string,signup_date:date,country:string,segment:string,age_band:string,marketing_opt_in:boolean>
 
@@ -61,59 +61,59 @@ Condition : (isnotnull(user_id#858) AND (user_id#858 = u_000000))
 
 (9) Generate [codegen id : 3]
 Input [6]: [user_id#858, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863]
-Arguments: explode(org.apache.spark.sql.catalyst.expressions.UnsafeArrayData@3f24243f), [user_id#858, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863], false, [salt#28713]
+Arguments: explode(org.apache.spark.sql.catalyst.expressions.UnsafeArrayData@3f24243f), [user_id#858, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863], false, [salt#28579]
 
 (10) Scan csv 
-Output [6]: [user_id#28729, signup_date#28730, country#28731, segment#28732, age_band#28733, marketing_opt_in#28734]
+Output [6]: [user_id#28595, signup_date#28596, country#28597, segment#28598, age_band#28599, marketing_opt_in#28600]
 Batched: false
-Location: InMemoryFileIndex [file:/C:/Users/Dana/Desktop/shopstream-spark/data/shopstream_medium_5820/users.csv]
+Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_small_5820/users.csv]
 PushedFilters: [IsNotNull(user_id), Not(EqualTo(user_id,u_000000))]
 ReadSchema: struct<user_id:string,signup_date:date,country:string,segment:string,age_band:string,marketing_opt_in:boolean>
 
 (11) Filter [codegen id : 4]
-Input [6]: [user_id#28729, signup_date#28730, country#28731, segment#28732, age_band#28733, marketing_opt_in#28734]
-Condition : (isnotnull(user_id#28729) AND NOT (user_id#28729 = u_000000))
+Input [6]: [user_id#28595, signup_date#28596, country#28597, segment#28598, age_band#28599, marketing_opt_in#28600]
+Condition : (isnotnull(user_id#28595) AND NOT (user_id#28595 = u_000000))
 
 (12) Project [codegen id : 4]
-Output [7]: [user_id#28729, signup_date#28730, country#28731, segment#28732, age_band#28733, marketing_opt_in#28734, 0 AS salt#28721]
-Input [6]: [user_id#28729, signup_date#28730, country#28731, segment#28732, age_band#28733, marketing_opt_in#28734]
+Output [7]: [user_id#28595, signup_date#28596, country#28597, segment#28598, age_band#28599, marketing_opt_in#28600, 0 AS salt#28587]
+Input [6]: [user_id#28595, signup_date#28596, country#28597, segment#28598, age_band#28599, marketing_opt_in#28600]
 
 (13) Union
 
 (14) Exchange
-Input [7]: [user_id#858, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863, salt#28713]
-Arguments: hashpartitioning(user_id#858, salt#28713, 200), ENSURE_REQUIREMENTS, [plan_id=25328]
+Input [7]: [user_id#858, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863, salt#28579]
+Arguments: hashpartitioning(user_id#858, salt#28579, 200), ENSURE_REQUIREMENTS, [plan_id=25142]
 
 (15) Sort [codegen id : 5]
-Input [7]: [user_id#858, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863, salt#28713]
-Arguments: [user_id#858 ASC NULLS FIRST, salt#28713 ASC NULLS FIRST], false, 0
+Input [7]: [user_id#858, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863, salt#28579]
+Arguments: [user_id#858 ASC NULLS FIRST, salt#28579 ASC NULLS FIRST], false, 0
 
 (16) SortMergeJoin [codegen id : 6]
-Left keys [2]: [user_id#25266, salt#28697]
-Right keys [2]: [user_id#858, salt#28713]
+Left keys [2]: [user_id#25132, salt#28563]
+Right keys [2]: [user_id#858, salt#28579]
 Join type: Inner
 Join condition: None
 
 (17) Project [codegen id : 6]
-Output [18]: [user_id#25266, event_id#25267, session_id#25268, product_id#25269, event_type#25270, event_ts#25271, ingest_ts#25272, price#25273, quantity#25274L, device#25275, app_version#25276, is_bot#25277, event_date#25278, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863]
-Input [21]: [user_id#25266, event_id#25267, session_id#25268, product_id#25269, event_type#25270, event_ts#25271, ingest_ts#25272, price#25273, quantity#25274L, device#25275, app_version#25276, is_bot#25277, event_date#25278, salt#28697, user_id#858, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863, salt#28713]
+Output [18]: [user_id#25132, event_id#25133, session_id#25134, product_id#25135, event_type#25136, event_ts#25137, ingest_ts#25138, price#25139, quantity#25140L, device#25141, app_version#25142, is_bot#25143, event_date#25144, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863]
+Input [21]: [user_id#25132, event_id#25133, session_id#25134, product_id#25135, event_type#25136, event_ts#25137, ingest_ts#25138, price#25139, quantity#25140L, device#25141, app_version#25142, is_bot#25143, event_date#25144, salt#28563, user_id#858, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863, salt#28579]
 
 (18) HashAggregate [codegen id : 6]
-Input [18]: [user_id#25266, event_id#25267, session_id#25268, product_id#25269, event_type#25270, event_ts#25271, ingest_ts#25272, price#25273, quantity#25274L, device#25275, app_version#25276, is_bot#25277, event_date#25278, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863]
+Input [18]: [user_id#25132, event_id#25133, session_id#25134, product_id#25135, event_type#25136, event_ts#25137, ingest_ts#25138, price#25139, quantity#25140L, device#25141, app_version#25142, is_bot#25143, event_date#25144, signup_date#859, country#860, segment#861, age_band#862, marketing_opt_in#863]
 Keys: []
-Functions [2]: [partial_count(1), partial_sum(cast(xxhash64(age_band#862, app_version#25276, country#860, device#25275, event_date#25278, event_id#25267, event_ts#25271, event_type#25270, ingest_ts#25272, is_bot#25277, marketing_opt_in#863, price#25273, product_id#25269, quantity#25274L, segment#861, session_id#25268, signup_date#859, user_id#25266, 42) as decimal(38,0)))]
-Aggregate Attributes [3]: [count#28804L, sum#28805, isEmpty#28806]
-Results [3]: [count#28807L, sum#28808, isEmpty#28809]
+Functions [2]: [partial_count(1), partial_sum(cast(xxhash64(age_band#862, app_version#25142, country#860, device#25141, event_date#25144, event_id#25133, event_ts#25137, event_type#25136, ingest_ts#25138, is_bot#25143, marketing_opt_in#863, price#25139, product_id#25135, quantity#25140L, segment#861, session_id#25134, signup_date#859, user_id#25132, 42) as decimal(38,0)))]
+Aggregate Attributes [3]: [count#28670L, sum#28671, isEmpty#28672]
+Results [3]: [count#28673L, sum#28674, isEmpty#28675]
 
 (19) Exchange
-Input [3]: [count#28807L, sum#28808, isEmpty#28809]
-Arguments: SinglePartition, ENSURE_REQUIREMENTS, [plan_id=25337]
+Input [3]: [count#28673L, sum#28674, isEmpty#28675]
+Arguments: SinglePartition, ENSURE_REQUIREMENTS, [plan_id=25151]
 
 (20) HashAggregate [codegen id : 7]
-Input [3]: [count#28807L, sum#28808, isEmpty#28809]
+Input [3]: [count#28673L, sum#28674, isEmpty#28675]
 Keys: []
-Functions [2]: [count(1), sum(cast(xxhash64(age_band#862, app_version#25276, country#860, device#25275, event_date#25278, event_id#25267, event_ts#25271, event_type#25270, ingest_ts#25272, is_bot#25277, marketing_opt_in#863, price#25273, product_id#25269, quantity#25274L, segment#861, session_id#25268, signup_date#859, user_id#25266, 42) as decimal(38,0)))]
-Aggregate Attributes [2]: [count(1)#28780L, sum(cast(xxhash64(age_band#862, app_version#25276, country#860, device#25275, event_date#25278, event_id#25267, event_ts#25271, event_type#25270, ingest_ts#25272, is_bot#25277, marketing_opt_in#863, price#25273, product_id#25269, quantity#25274L, segment#861, session_id#25268, signup_date#859, user_id#25266, 42) as decimal(38,0)))#28782]
-Results [2]: [count(1)#28780L AS rows#28781L, sum(cast(xxhash64(age_band#862, app_version#25276, country#860, device#25275, event_date#25278, event_id#25267, event_ts#25271, event_type#25270, ingest_ts#25272, is_bot#25277, marketing_opt_in#863, price#25273, product_id#25269, quantity#25274L, segment#861, session_id#25268, signup_date#859, user_id#25266, 42) as decimal(38,0)))#28782 AS checksum#28783]
+Functions [2]: [count(1), sum(cast(xxhash64(age_band#862, app_version#25142, country#860, device#25141, event_date#25144, event_id#25133, event_ts#25137, event_type#25136, ingest_ts#25138, is_bot#25143, marketing_opt_in#863, price#25139, product_id#25135, quantity#25140L, segment#861, session_id#25134, signup_date#859, user_id#25132, 42) as decimal(38,0)))]
+Aggregate Attributes [2]: [count(1)#28646L, sum(cast(xxhash64(age_band#862, app_version#25142, country#860, device#25141, event_date#25144, event_id#25133, event_ts#25137, event_type#25136, ingest_ts#25138, is_bot#25143, marketing_opt_in#863, price#25139, product_id#25135, quantity#25140L, segment#861, session_id#25134, signup_date#859, user_id#25132, 42) as decimal(38,0)))#28648]
+Results [2]: [count(1)#28646L AS rows#28647L, sum(cast(xxhash64(age_band#862, app_version#25142, country#860, device#25141, event_date#25144, event_id#25133, event_ts#25137, event_type#25136, ingest_ts#25138, is_bot#25143, marketing_opt_in#863, price#25139, product_id#25135, quantity#25140L, segment#861, session_id#25134, signup_date#859, user_id#25132, 42) as decimal(38,0)))#28648 AS checksum#28649]
 
 

@@ -1,4 +1,4 @@
 variant,median_s,runs_s,revenue
-raw_json,1.541,"[1.541, 1.541, 1.344]",428810.69
-parquet_unpartitioned,0.436,"[0.442, 0.396, 0.436]",424863.19
-parquet_partitioned,0.305,"[0.305, 0.279, 0.324]",424863.19
+raw_json,1.186,"[1.173, 1.21, 1.186]",428810.69
+parquet_unpartitioned,0.36,"[0.453, 0.319, 0.36]",424863.19
+parquet_partitioned,0.459,"[0.425, 0.865, 0.459]",424863.19

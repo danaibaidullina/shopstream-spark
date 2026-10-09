@@ -17,7 +17,7 @@ AdaptiveSparkPlan (13)
 (1) Scan parquet 
 Output [5]: [product_id#9967, event_type#9968, price#9971, quantity#9972L, event_date#9975]
 Batched: true
-Location: InMemoryFileIndex [file:/C:/Users/Dana/Desktop/shopstream-spark/data/shopstream_medium_5820/lake/silver_flat]
+Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_medium_5820/lake/silver_flat]
 PushedFilters: [IsNotNull(event_type), IsNotNull(event_date), EqualTo(event_type,purchase), GreaterThanOrEqual(event_date,2026-08-10), LessThanOrEqual(event_date,2026-08-16), IsNotNull(product_id)]
 ReadSchema: struct<product_id:string,event_type:string,price:double,quantity:bigint,event_date:date>
 
@@ -32,7 +32,7 @@ Input [5]: [product_id#9967, event_type#9968, price#9971, quantity#9972L, event_
 (4) Scan csv 
 Output [2]: [product_id#831, category#832]
 Batched: false
-Location: InMemoryFileIndex [file:/C:/Users/Dana/Desktop/shopstream-spark/data/shopstream_medium_5820/products.csv]
+Location: InMemoryFileIndex [file:/c:/Users/Dana/Desktop/shopstream-spark/data/shopstream_medium_5820/products.csv]
 PushedFilters: [IsNotNull(category), EqualTo(category,electronics), IsNotNull(product_id)]
 ReadSchema: struct<product_id:string,category:string>
 
