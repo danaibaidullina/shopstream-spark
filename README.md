@@ -12,11 +12,11 @@ Every timing is the median of 3 runs after a warm-up, and every claim is backed 
 
 | | Finding | Evidence |
 |---|---|---|
-| ⚡ | **Shuffle-file count, not CPU, was the bottleneck.** With 128 shuffle partitions and no AQE coalescing the workload took 52.7 s; disabling Spark's bypass-merge shuffle writer brought it to 8.6 s (**6.1×**). AQE coalescing removes most of the penalty automatically. | `results/E1_grid.csv`, `results/E1b_bypass_check.csv` |
-| 🤖 | **One bot account skews both metrics and performance.** It is 3.85% of all events and 1,772× the median user, producing a 9.1× max/median partition skew. It was detected from the data (99.9th percentiles + no cart activity), with no hard-coded id. | `results/B_bot_summary.csv`, `results/D1_*` |
-| 🔗 | **Broadcast beats every skew fix locally.** Broadcast hash join was 7.7× faster than sort-merge. AQE skew join (proven by `SortMergeJoin(skew=true)` in the final plan) and salting with N ∈ {4, 16, 64} returned identical checksums but did not pay off at this scale. The report explains why local mode hides the skew penalty. | `results/D2_join_matrix.csv`, `results/D2_plan_*.txt` |
-| 🗂️ | **Layout pays on every query.** An explicit schema reads 10× faster than inference. Date-partitioned Parquet answers a weekly revenue query 5× faster than raw JSON. A naive write produces 16 files/day and +33% storage. | `results/A1_*`, `results/A2_*`, `results/A3_*` |
-| 📈 | **Amdahl serial fraction s ≈ 0.26** (max ~3.9× speed-up). 8 and 16 logical cores perform the same. | `results/E2_scaling.csv` |
+| **Shuffle-file count, not CPU, was the bottleneck.** With 128 shuffle partitions and no AQE coalescing the workload took 52.7 s; disabling Spark's bypass-merge shuffle writer brought it to 8.6 s (**6.1×**). AQE coalescing removes most of the penalty automatically. | `results/E1_grid.csv`, `results/E1b_bypass_check.csv` |
+| **One bot account skews both metrics and performance.** It is 3.85% of all events and 1,772× the median user, producing a 9.1× max/median partition skew. It was detected from the data (99.9th percentiles + no cart activity), with no hard-coded id. | `results/B_bot_summary.csv`, `results/D1_*` |
+| **Broadcast beats every skew fix locally.** Broadcast hash join was 7.7× faster than sort-merge. AQE skew join (proven by `SortMergeJoin(skew=true)` in the final plan) and salting with N ∈ {4, 16, 64} returned identical checksums but did not pay off at this scale. The report explains why local mode hides the skew penalty. | `results/D2_join_matrix.csv`, `results/D2_plan_*.txt` |
+| **Layout pays on every query.** An explicit schema reads 10× faster than inference. Date-partitioned Parquet answers a weekly revenue query 5× faster than raw JSON. A naive write produces 16 files/day and +33% storage. | `results/A1_*`, `results/A2_*`, `results/A3_*` |
+| **Amdahl serial fraction s ≈ 0.26** (max ~3.9× speed-up). 8 and 16 logical cores perform the same. | `results/E2_scaling.csv` |
 
 <p align="center">
   <img src="results/E1_grid_heatmap.png" width="48%" alt="Benchmark heat map">
