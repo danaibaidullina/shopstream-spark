@@ -1,20 +1,20 @@
-# окружение Python
+# Python environments
 .venv/
 __pycache__/
 .ipynb_checkpoints/
 
-# данные генерируются заново командой из README (сотни МБ, в git не храним)
+# generated data (re-created from the seed, hundreds of MB)
 data/
 
-# служебные папки Spark
+# Spark scratch
 spark_tmp/
 spark-warehouse/
 metastore_db/
 derby.log
 
-# файлы преподавателя: не публикуем (генератор содержит "скрытую" структуру данных)
+# course materials: not published (the generator encodes the instructor's ground truth)
 shopstream_gen.py
 AssignmentMid.docx
 
-# архив для сдачи
+# submission archive
 *.zip

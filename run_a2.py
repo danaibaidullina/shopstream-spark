@@ -1,12 +1,12 @@
 """
-Воспроизводит всё задание одной командой:
+Reproduce every result of the assignment with one command:
 
     python run_a2.py --scale medium --seed <ID4>
 
-Скрипт запускает ноутбук ibaidullina.ipynb сверху вниз (как "Run All")
-и передаёт ему scale и seed через переменные окружения.
-Все таблицы (CSV) и графики (PNG) появляются в папке results/,
-а выполненная копия ноутбука сохраняется как results/executed_<scale>.ipynb.
+The script executes ibaidullina.ipynb top-to-bottom (like "Run All") and passes
+scale and seed through environment variables. All tables (CSV) and figures (PNG)
+are written to results/, and the executed notebook is saved as
+results/executed_<scale>.ipynb.
 """
 import argparse
 import os
@@ -19,7 +19,7 @@ NOTEBOOK = "ibaidullina.ipynb"
 def main():
     ap = argparse.ArgumentParser(description="ShopStream A2: reproduce all results")
     ap.add_argument("--scale", default="medium", choices=["tiny", "small", "medium", "large"])
-    ap.add_argument("--seed", type=int, required=True, help="5820")
+    ap.add_argument("--seed", type=int, required=True, help="last 4 digits of the student ID")
     a = ap.parse_args()
 
     os.makedirs("results", exist_ok=True)
@@ -29,8 +29,8 @@ def main():
         sys.executable, "-m", "jupyter", "nbconvert",
         "--to", "notebook", "--execute", NOTEBOOK,
         "--output-dir", "results", "--output", f"executed_{a.scale}",
-        "--ExecutePreprocessor.timeout=-1",          # без ограничения по времени
-        "--ExecutePreprocessor.kernel_name=python3",  # ядро из текущего .venv
+        "--ExecutePreprocessor.timeout=-1",          # no time limit
+        "--ExecutePreprocessor.kernel_name=python3",  # kernel of the active environment
     ]
     print("Running:", " ".join(cmd))
     subprocess.run(cmd, env=env, check=True)
